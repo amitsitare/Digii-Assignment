@@ -1,0 +1,29 @@
+# Dependencies
+node_modules/
+frontend/node_modules/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+backend/venv/
+venv/
+.env
+.env.local
+*.env
+!backend/.env.example
+
+# Build / IDE
+frontend/build/
+dist/
+.idea/
+.vscode/
+*.log
+.DS_Store
+
+# Testing / coverage
+.coverage
+htmlcov/
+.pytest_cache/

@@ -1,0 +1,1827 @@
+/* Campus Resource Management - Custom Styles */
+
+:root {
+  /* Primary Colors */
+  --primary-blue: #4361ee;
+  --primary-dark: #3a0ca3;
+  --primary-light: #4cc9f0;
+  
+  /* Secondary Colors */
+  --secondary-purple: #7209b7;
+  --accent-pink: #f72585;
+  
+  /* Neutral Colors */
+  --dark-bg: #1a1a2e;
+  --card-bg: #16213e;
+  --light-bg: #f8f9fa;
+  --white: #ffffff;
+  
+  /* Text Colors */
+  --text-primary: #212529;
+  --text-secondary: #6c757d;
+  --text-light: #e9ecef;
+  
+  /* Status Colors */
+  --success: #06d6a0;
+  --warning: #ffd166;
+  --danger: #ef476f;
+  --info: #118ab2;
+  
+  /* Gradients */
+  --gradient-primary: linear-gradient(135deg, #4361ee 0%, #7209b7 100%);
+  --gradient-hero: linear-gradient(135deg, #1a1a2e 0%, #3a0ca3 50%, #4361ee 100%);
+}
+
+/* Typography */
+body {
+  font-family: 'Inter', sans-serif;
+  color: var(--text-primary);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+}
+
+/* Custom Button Styles */
+.btn-primary-gradient {
+  background: var(--gradient-primary);
+  border: none;
+  color: white;
+  padding: 12px 32px;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btn-primary-gradient:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(67, 97, 238, 0.4);
+  color: white;
+}
+
+.btn-outline-custom {
+  background: transparent;
+  border: 2px solid var(--primary-blue);
+  color: var(--primary-blue);
+  padding: 10px 28px;
+  border-radius: 8px;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.btn-outline-custom:hover {
+  background: var(--primary-blue);
+  color: white;
+}
+
+/* Card Styles */
+.feature-card {
+  background: white;
+  border-radius: 16px;
+  padding: 32px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s, box-shadow 0.3s;
+  border: none;
+}
+
+.feature-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+}
+
+.role-card-admin {
+  border-top: 4px solid var(--secondary-purple);
+}
+
+.role-card-professor {
+  border-top: 4px solid var(--primary-blue);
+}
+
+.role-card-student {
+  border-top: 4px solid var(--primary-light);
+}
+
+/* What We Solve - Hierarchy / Table layout */
+.what-we-solve-section {
+  background: linear-gradient(180deg, #f8f9fa 0%, #fff 100%);
+}
+
+.what-we-solve-section .section-heading {
+  color: var(--text-primary);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.what-we-solve-section .section-sub {
+  font-size: 1rem;
+  max-width: 420px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.solve-table-wrapper {
+  max-width: 900px;
+  margin: 0 auto;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 4px 24px rgba(67, 97, 238, 0.08), 0 2px 8px rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(67, 97, 238, 0.12);
+}
+
+.solve-table-header {
+  display: grid;
+  grid-template-columns: 56px 1fr 2fr;
+  gap: 1rem;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-blue) 100%);
+  color: white;
+  font-weight: 600;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.solve-table-header .solve-col-index,
+.solve-table-header .solve-col-problem,
+.solve-table-header .solve-col-solution {
+  color: white;
+}
+
+.solve-table-row {
+  display: grid;
+  grid-template-columns: 56px 1fr 2fr;
+  gap: 1rem;
+  align-items: center;
+  padding: 1.25rem 1.5rem;
+  background: white;
+  border-bottom: 1px solid #e9ecef;
+  border-left: 4px solid transparent;
+  transition: background 0.2s, border-left-color 0.2s;
+}
+
+.solve-table-row:last-child {
+  border-bottom: none;
+}
+
+.solve-table-row:hover {
+  background: #f8fafc;
+}
+
+.solve-accent-primary { border-left-color: var(--primary-blue); }
+.solve-accent-primary .solve-index-badge { background: rgba(67, 97, 238, 0.15); color: var(--primary-blue); }
+.solve-accent-purple { border-left-color: var(--secondary-purple); }
+.solve-accent-purple .solve-index-badge { background: rgba(114, 9, 183, 0.15); color: var(--secondary-purple); }
+.solve-accent-teal { border-left-color: var(--primary-light); }
+.solve-accent-teal .solve-index-badge { background: rgba(76, 201, 240, 0.2); color: var(--info); }
+.solve-accent-pink { border-left-color: var(--accent-pink); }
+.solve-accent-pink .solve-index-badge { background: rgba(247, 37, 133, 0.15); color: var(--accent-pink); }
+
+.solve-col-index {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.solve-index-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.solve-col-problem {
+  font-size: 1rem;
+  color: var(--text-primary);
+}
+
+.solve-col-solution {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+/* Features Section */
+.features-section {
+  background: linear-gradient(180deg, #fff 0%, #f8fafc 100%);
+}
+
+.features-section-header {
+  max-width: 560px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.features-heading {
+  color: var(--text-primary);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.5rem;
+}
+
+.features-sub {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  margin-bottom: 0;
+}
+
+.feature-card-item {
+  padding: 0;
+  border: 1px solid rgba(67, 97, 238, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.feature-card-item .card-body {
+  padding: 1.75rem 1.5rem;
+  position: relative;
+}
+
+.feature-icon-wrap {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+  transition: transform 0.2s ease;
+}
+
+.feature-icon-primary {
+  background: rgba(67, 97, 238, 0.12);
+  color: var(--primary-blue);
+}
+
+.feature-icon-purple {
+  background: rgba(114, 9, 183, 0.12);
+  color: var(--secondary-purple);
+}
+
+.feature-icon-teal {
+  background: rgba(76, 201, 240, 0.2);
+  color: var(--info);
+}
+
+.feature-icon-pink {
+  background: rgba(247, 37, 133, 0.12);
+  color: var(--accent-pink);
+}
+
+.feature-icon-info {
+  background: rgba(17, 138, 178, 0.12);
+  color: var(--info);
+}
+
+.feature-card-item:hover .feature-icon-wrap {
+  transform: scale(1.05);
+}
+
+.feature-title {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.01em;
+}
+
+.feature-desc {
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: var(--text-secondary) !important;
+}
+
+.feature-card-item.feature-accent-primary {
+  border-top: 3px solid transparent;
+  border-top-color: var(--primary-blue);
+}
+
+.feature-card-item.feature-accent-purple {
+  border-top: 3px solid var(--secondary-purple);
+}
+
+.feature-card-item.feature-accent-teal {
+  border-top: 3px solid var(--primary-light);
+}
+
+.feature-card-item.feature-accent-pink {
+  border-top: 3px solid var(--accent-pink);
+}
+
+.feature-card-item.feature-accent-info {
+  border-top: 3px solid var(--info);
+}
+
+@media (max-width: 768px) {
+  .solve-table-header,
+  .solve-table-row {
+    grid-template-columns: 44px 1fr;
+    grid-template-rows: auto auto;
+  }
+
+  .solve-table-header .solve-col-solution,
+  .solve-table-row .solve-col-solution {
+    grid-column: 1 / -1;
+    padding-left: 0;
+    margin-top: 0.25rem;
+    padding-top: 0.5rem;
+    border-top: 1px dashed #e9ecef;
+  }
+
+  .solve-table-header .solve-col-solution {
+    border-top-color: rgba(255, 255, 255, 0.3);
+    padding-top: 0.35rem;
+    font-size: 0.7rem;
+    opacity: 0.9;
+  }
+
+  .solve-table-header {
+    padding: 0.85rem 1rem;
+    font-size: 0.75rem;
+  }
+
+  .solve-table-row {
+    padding: 1rem;
+  }
+}
+
+/* Form Styles */
+.form-input {
+  width: 100%;
+  padding: 14px 18px;
+  border: 2px solid #e9ecef;
+  border-radius: 10px;
+  font-size: 16px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-input:focus {
+  border-color: var(--primary-blue);
+  box-shadow: 0 0 0 4px rgba(67, 97, 238, 0.1);
+  outline: none;
+}
+
+/* Alert Styles */
+.alert-info-custom {
+  background: #e8f4f8;
+  border-left: 4px solid var(--info);
+  border-radius: 8px;
+  padding: 16px 20px;
+  font-size: 14px;
+}
+
+.alert-warning-custom {
+  background: #fff9e6;
+  border-left: 4px solid var(--warning);
+  border-radius: 8px;
+  padding: 16px 20px;
+}
+
+.alert-admin {
+  background: #f3e8ff;
+  border-left: 4px solid var(--secondary-purple);
+  border-radius: 8px;
+  padding: 16px 20px;
+  font-weight: 500;
+}
+
+/* Hero Section */
+.hero-section {
+  position: relative;
+  min-height: 85vh;
+  min-height: min(85vh, 620px);
+  color: white;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  background: var(--gradient-hero); /* fallback if image fails */
+}
+
+.hero-bg-image {
+  position: absolute;
+  inset: 0;
+  /* Lush campus / stone university (primary) with local fallback */
+  background-image: url('https://images.unsplash.com/photo-1759093886545-ad615b17ce46?w=1920&q=85'), url('./assets/campus-hero-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(26, 26, 46, 0.92) 0%,
+    rgba(58, 12, 163, 0.85) 45%,
+    rgba(67, 97, 238, 0.8) 100%
+  );
+}
+
+.hero-content-wrapper {
+  position: relative;
+  z-index: 1;
+  padding: 2rem 1rem;
+}
+
+.hero-badge {
+  display: inline-block;
+  text-transform: uppercase;
+  letter-spacing: 0.25em;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 1rem;
+  padding: 0.35rem 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 50px;
+}
+
+.hero-title {
+  font-size: clamp(2.25rem, 5vw, 3.75rem);
+  font-weight: 700;
+  margin-bottom: 1.25rem;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
+}
+
+.hero-subtitle {
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  opacity: 0.95;
+  margin-bottom: 2rem;
+  max-width: 540px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.hero-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.btn-hero-primary {
+  background: white;
+  color: var(--primary-dark);
+  padding: 0.875rem 1.75rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 10px;
+  border: none;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btn-hero-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  color: var(--primary-dark);
+}
+
+.btn-hero-outline {
+  background: transparent;
+  color: white;
+  padding: 0.875rem 1.75rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 10px;
+  border: 2px solid rgba(255, 255, 255, 0.7);
+  transition: background 0.2s, border-color 0.2s, transform 0.2s;
+}
+
+.btn-hero-outline:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: white;
+  color: white;
+  transform: translateY(-2px);
+}
+
+/* Auth Pages */
+.auth-container {
+  min-height: 100vh;
+  display: flex;
+}
+
+.auth-branding {
+  background: var(--gradient-hero);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 60px;
+}
+
+.auth-form-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 60px;
+  background: white;
+}
+
+.auth-title {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.auth-subtitle {
+  color: var(--text-secondary);
+  margin-bottom: 2rem;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 250px;
+  min-height: calc(100vh - 56px);
+  background: var(--dark-bg);
+  color: white;
+  padding-top: 20px;
+}
+
+.sidebar-link {
+  display: block;
+  padding: 12px 24px;
+  color: var(--text-light);
+  text-decoration: none;
+  transition: all 0.2s;
+}
+
+.sidebar-link:hover,
+.sidebar-link.active {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+}
+
+/* Dashboard */
+.dashboard-container {
+  display: flex;
+  min-height: calc(100vh - 56px);
+}
+
+.dashboard-content {
+  flex: 1;
+  padding: 30px;
+  background: var(--light-bg);
+}
+
+/* Compact stat cards with colored backgrounds */
+.stat-cards-row .stat-card {
+  border: none;
+  border-radius: 10px;
+  padding: 14px 16px;
+  box-shadow: 0 2px 8px rgba(66, 64, 64, 0.08);
+  min-height: auto;
+}
+
+.stat-card h3 {
+  font-size: 1.35rem;
+  font-weight: 700;
+  margin-bottom: 2px;
+  color: inherit;
+}
+
+.stat-card p {
+  font-size: 0.8rem;
+  font-weight: 500;
+  margin-bottom: 0;
+  opacity: 0.95;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.stat-card--students {
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  color: white;
+}
+
+.stat-card--professors {
+  background: linear-gradient(135deg, #059669 0%, #047857 100%);
+  color: white;
+}
+
+.stat-card--classrooms {
+  background: linear-gradient(135deg, #d97706 0%, #b45309 100%);
+  color: white;
+}
+
+.stat-card--departments {
+  background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%);
+  color: white;
+}
+
+/* Timetable Grid */
+.timetable-grid {
+  display: grid;
+  gap: 1px;
+  background: #e9ecef;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.timetable-cell {
+  background: white;
+  padding: 12px;
+  min-height: 80px;
+}
+
+.timetable-header {
+  background: var(--primary-blue);
+  color: white;
+  font-weight: 600;
+  text-align: center;
+  padding: 12px;
+}
+
+.timetable-time {
+  background: #f8f9fa;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.class-block {
+  background: rgba(67, 97, 238, 0.1);
+  border-left: 3px solid var(--primary-blue);
+  padding: 8px;
+  border-radius: 4px;
+  font-size: 0.85rem;
+}
+
+/* Timetable calendar panel (left side when Manage Timetable is selected) */
+.timetable-calendar-panel {
+  width: 280px;
+  min-width: 280px;
+  min-height: calc(100vh - 56px);
+  background: var(--dark-bg);
+  color: white;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+.timetable-calendar-header {
+  margin-bottom: 16px;
+}
+
+.timetable-calendar-menu-link {
+  color: var(--text-light);
+  text-decoration: none;
+  font-size: 0.9rem;
+  display: inline-block;
+  margin-bottom: 8px;
+}
+
+.timetable-calendar-menu-link:hover {
+  color: white;
+}
+
+.timetable-calendar-title {
+  font-size: 1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.timetable-calendar-wrapper {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* react-calendar: Google Calendar–style dark theme inside timetable panel */
+.timetable-calendar-panel .react-calendar {
+  width: 100%;
+  max-width: 100%;
+  background: transparent;
+  border: none;
+  font-family: inherit;
+  line-height: 1.25;
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.timetable-calendar-panel .react-calendar__navigation {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 40px;
+  margin-bottom: 12px;
+  gap: 4px;
+}
+
+.timetable-calendar-panel .react-calendar__navigation button {
+  min-width: 36px;
+  height: 36px;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.timetable-calendar-panel .react-calendar__navigation button:enabled:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.timetable-calendar-panel .react-calendar__navigation button:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.timetable-calendar-panel .react-calendar__navigation__label {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: white;
+  pointer-events: none;
+}
+
+.timetable-calendar-panel .react-calendar__month-view__weekdays {
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 4px;
+}
+
+.timetable-calendar-panel .react-calendar__month-view__weekdays__weekday {
+  padding: 6px 0;
+  text-align: center;
+}
+
+.timetable-calendar-panel .react-calendar__month-view__weekdays__weekday abbr {
+  text-decoration: none;
+}
+
+.timetable-calendar-panel .react-calendar__month-view__days {
+  display: grid !important;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+}
+
+.timetable-calendar-panel .react-calendar__month-view__days__day {
+  aspect-ratio: 1;
+  max-width: 100%;
+}
+
+.timetable-calendar-panel .react-calendar__tile {
+  padding: 0;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.85rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 32px;
+  max-width: 100%;
+  transition: background 0.15s ease;
+}
+
+.timetable-calendar-panel .react-calendar__tile:enabled:hover {
+  background: rgba(255, 255, 255, 0.15);
+  color: white;
+}
+
+.timetable-calendar-panel .react-calendar__tile--now {
+  background: rgba(67, 97, 238, 0.4);
+  color: white;
+  font-weight: 600;
+}
+
+.timetable-calendar-panel .react-calendar__tile--active,
+.timetable-calendar-panel .react-calendar__tile--selected {
+  background: var(--primary-blue) !important;
+  color: white !important;
+  font-weight: 600;
+}
+
+.timetable-calendar-panel .react-calendar__tile--now.react-calendar__tile--active {
+  background: var(--primary-blue) !important;
+}
+
+.timetable-calendar-panel .react-calendar__month-view__days__day--neighboringMonth {
+  color: rgba(255, 255, 255, 0.35);
+}
+
+.timetable-calendar-panel .react-calendar__month-view__days__day--weekend {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.timetable-calendar-actions {
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.timetable-calendar-today-btn {
+  width: 100%;
+  padding: 8px 12px;
+  background: rgba(255, 255, 255, 0.15);
+  border: none;
+  border-radius: 6px;
+  color: white;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.timetable-calendar-today-btn:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+/* Room × Time timetable grid */
+.timetable-room-grid-wrapper {
+  overflow-x: auto;
+}
+
+.timetable-room-grid {
+  table-layout: fixed;
+}
+
+.timetable-room-grid .timetable-room-col {
+  width: 135px;
+  min-width: 135px;
+  vertical-align: middle !important;
+  white-space: normal;
+  word-break: break-word;
+}
+
+.timetable-room-grid .timetable-slot-col {
+  min-width: 100px;
+  font-size: 0.8rem;
+}
+
+.timetable-room-cell {
+  min-width: 100px;
+  min-height: 70px;
+}
+
+.timetable-room-block {
+  font-size: 0.8rem;
+}
+
+/* Professor's own classes in My Schedule – pale yellow */
+.timetable-room-block-mine {
+  background-color: #f5ed97 !important;
+}
+
+.timetable-room-block-clickable {
+  cursor: pointer;
+  transition: background-color 0.15s ease, box-shadow 0.15s ease;
+}
+.timetable-room-block-clickable:hover {
+  background-color: var(--bs-light) !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+.timetable-room-block-mine.timetable-room-block-clickable:hover {
+  background-color: #fef9c3 !important;
+}
+
+/* Notifications */
+.notification-dropdown {
+  width: 350px;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.notification-item {
+  padding: 12px 16px;
+  border-bottom: 1px solid #e9ecef;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.notification-item:hover {
+  background: #f8f9fa;
+}
+
+.notification-item.unread {
+  background: rgba(67, 97, 238, 0.05);
+}
+
+.notification-time {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+/* Chat */
+.chat-container {
+  display: flex;
+  height: calc(100vh - 120px);
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.chat-sidebar {
+  width: 300px;
+  border-right: 1px solid #e9ecef;
+}
+
+.chat-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-messages {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.chat-input-container {
+  padding: 20px;
+  border-top: 1px solid #e9ecef;
+}
+
+.message-bubble {
+  max-width: 70%;
+  padding: 12px 16px;
+  border-radius: 16px;
+  margin-bottom: 8px;
+}
+
+.message-bubble.sent {
+  background: var(--primary-blue);
+  color: white;
+  margin-left: auto;
+  border-bottom-right-radius: 4px;
+}
+
+.message-bubble.received {
+  background: #f1f3f4;
+  border-bottom-left-radius: 4px;
+}
+
+/* Navbar */
+.navbar-custom {
+  background: white;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.navbar-brand-custom {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  color: var(--primary-blue) !important;
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+
+.navbar-logo {
+  height: 40px;
+  width: auto;
+  display: block;
+  object-fit: contain;
+}
+
+/* Footer – dark background, readable text */
+.footer {
+  background: var(--dark-bg);
+  color: #e9ecef;
+  padding: 60px 0 30px;
+}
+
+.footer-logo-link {
+  display: inline-block;
+  margin-bottom: 12px;
+}
+
+.footer-logo {
+  height: 44px;
+  width: auto;
+  object-fit: contain;
+  display: block;
+}
+
+.footer-tagline,
+.footer-contact,
+.footer-copyright {
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.footer-heading {
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+.footer a {
+  color: rgba(255, 255, 255, 0.9);
+  text-decoration: none;
+  display: block;
+  margin-bottom: 8px;
+  transition: color 0.2s;
+}
+
+.footer a:hover {
+  color: #fff;
+}
+
+.footer-divider {
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .auth-branding {
+    display: none;
+  }
+  
+  .sidebar {
+    position: fixed;
+    left: -250px;
+    transition: left 0.3s;
+    z-index: 1000;
+  }
+  
+  .sidebar.open {
+    left: 0;
+  }
+  
+  .hero-section {
+    min-height: 75vh;
+  }
+}
+
+/* Loading Spinner */
+.loading-spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 200px;
+}
+
+/* Table Styles */
+.table-custom {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.table-custom th {
+  background: var(--light-bg);
+  font-weight: 600;
+  border: none;
+}
+
+.table-custom td {
+  vertical-align: middle;
+  border-color: #e9ecef;
+}
+
+/* Modal */
+.modal-custom .modal-content {
+  border-radius: 16px;
+  border: none;
+}
+
+.modal-custom .modal-header {
+  border-bottom: 1px solid #e9ecef;
+  padding: 20px 24px;
+}
+
+.modal-custom .modal-body {
+  padding: 24px;
+}
+
+.modal-custom .modal-footer {
+  border-top: 1px solid #e9ecef;
+  padding: 16px 24px;
+}
+
+/* Badge */
+.badge-custom {
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-weight: 500;
+  font-size: 0.75rem;
+}
+
+.badge-admin {
+  background: rgba(114, 9, 183, 0.1);
+  color: var(--secondary-purple);
+}
+
+.badge-professor {
+  background: rgba(67, 97, 238, 0.1);
+  color: var(--primary-blue);
+}
+
+.badge-student {
+  background: rgba(76, 201, 240, 0.1);
+  color: #0891b2;
+}
+
+/* ========== Professor Dashboard ========== */
+.professor-dashboard {
+  background: linear-gradient(160deg, #f0f4f8 0%, #e2e8f0 50%, #f8fafc 100%);
+  min-height: 100%;
+}
+
+.professor-dashboard-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 320px;
+  gap: 16px;
+}
+
+.professor-dashboard-loading p {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+}
+
+.professor-dashboard-spinner {
+  width: 44px;
+  height: 44px;
+  border: 3px solid #e2e8f0;
+  border-top-color: var(--primary-blue);
+  border-radius: 50%;
+  animation: professor-spin 0.8s linear infinite;
+}
+
+@keyframes professor-spin {
+  to { transform: rotate(360deg); }
+}
+
+.professor-dashboard-header {
+  margin-bottom: 28px;
+}
+
+.professor-dashboard-header h1 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 6px;
+  letter-spacing: -0.02em;
+}
+
+.professor-dashboard-header p {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #64748b;
+}
+
+.professor-dashboard-section {
+  margin-bottom: 24px;
+}
+
+/* Today card */
+.professor-card {
+  border: none;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(30, 41, 59, 0.08);
+  background: white;
+}
+
+.professor-card--today .professor-card__header {
+  background: linear-gradient(135deg, #0f766e 0%, #0d9488 50%, #14b8a6 100%);
+  color: white;
+  padding: 16px 24px;
+}
+
+.professor-card__header--today .professor-card__badge {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  opacity: 0.95;
+  margin-bottom: 4px;
+}
+
+.professor-card__header--today h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.professor-card__body {
+  padding: 20px 24px;
+}
+
+.professor-empty {
+  text-align: center;
+  padding: 32px 16px;
+  color: #94a3b8;
+  font-size: 0.95rem;
+}
+
+.professor-table {
+  margin: 0;
+  border-collapse: collapse;
+}
+
+.professor-table thead th {
+  background: #f8fafc;
+  color: #475569;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 12px 16px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.professor-table tbody td {
+  padding: 14px 16px;
+  border-bottom: 1px solid #f1f5f9;
+  vertical-align: middle;
+  font-size: 0.9rem;
+}
+
+.professor-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.professor-table tbody tr:hover {
+  background: #f8fafc;
+}
+
+.professor-table__time {
+  color: #0f766e;
+  font-weight: 500;
+}
+
+.professor-room {
+  display: inline-block;
+  background: #e0f2fe;
+  color: #0369a1;
+  padding: 4px 10px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+/* Weekly schedule card */
+.professor-card--weekly {
+  padding: 0;
+}
+
+.professor-card--weekly .card-body {
+  padding: 24px;
+}
+
+.professor-weekly-header {
+  margin-bottom: 20px;
+}
+
+.professor-weekly-header h2 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #1e293b;
+  margin-bottom: 4px;
+}
+
+.professor-weekly-header p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #64748b;
+}
+
+.professor-weekly-grid {
+  margin: 0 -6px;
+}
+
+.professor-day-card {
+  background: white;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  overflow: hidden;
+  min-height: 180px;
+  transition: box-shadow 0.2s, border-color 0.2s;
+}
+
+.professor-day-card:hover {
+  box-shadow: 0 4px 12px rgba(30, 41, 59, 0.06);
+}
+
+.professor-day-card--today {
+  border-color: var(--primary-blue);
+  box-shadow: 0 0 0 2px rgba(67, 97, 238, 0.15);
+  background: linear-gradient(180deg, #f0f4ff 0%, #ffffff 24px);
+}
+
+.professor-day-card__header {
+  background: #f8fafc;
+  padding: 10px 12px;
+  text-align: center;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.professor-day-card--today .professor-day-card__header {
+  background: linear-gradient(135deg, #4361ee 0%, #5b21b6 100%);
+  color: white;
+  border-bottom: none;
+}
+
+.professor-day-card__label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.professor-day-card__body {
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.professor-day-card__empty {
+  margin: 0;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 0.8rem;
+  color: #94a3b8;
+}
+
+.professor-class-block {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  padding: 10px 12px;
+  background: #f0f4ff;
+  border: 1px solid #c7d2fe;
+  border-radius: 10px;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.2s, border-color 0.2s, transform 0.15s;
+}
+
+.professor-class-block:hover {
+  background: #e0e7ff;
+  border-color: var(--primary-blue);
+  transform: translateY(-1px);
+}
+
+.professor-class-block__subject {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #1e293b;
+  margin-bottom: 2px;
+}
+
+.professor-class-block__time {
+  font-size: 0.75rem;
+  color: #0f766e;
+  font-weight: 500;
+}
+
+.professor-class-block__room {
+  font-size: 0.75rem;
+  color: #64748b;
+  margin-bottom: 8px;
+}
+
+.professor-class-block__action {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--primary-blue);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-top: auto;
+  padding-top: 6px;
+  border-top: 1px solid rgba(67, 97, 238, 0.2);
+  width: 100%;
+  text-align: center;
+}
+
+.professor-class-block:hover .professor-class-block__action {
+  color: var(--primary-dark);
+}
+
+/* Reschedule modal */
+.professor-modal .modal-content {
+  border: none;
+  border-radius: 20px;
+  box-shadow: 0 20px 60px rgba(30, 41, 59, 0.15);
+  overflow: hidden;
+}
+
+.professor-modal__header {
+  background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+  color: white;
+  border-bottom: none;
+  padding: 20px 24px;
+}
+
+.professor-modal__header .modal-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.professor-modal__header .btn-close {
+  filter: invert(1);
+  opacity: 0.8;
+}
+
+.professor-modal__body {
+  padding: 24px;
+}
+
+.professor-modal__alert {
+  border-radius: 10px;
+}
+
+.professor-modal__summary {
+  background: #f8fafc;
+  border-radius: 12px;
+  padding: 16px 18px;
+  margin-bottom: 20px;
+  border-left: 4px solid var(--primary-blue);
+}
+
+.professor-modal__summary-subject {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #1e293b;
+  margin: 0 0 6px 0;
+}
+
+.professor-modal__summary-current {
+  font-size: 0.9rem;
+  color: #64748b;
+  margin: 0;
+}
+
+.professor-form-group {
+  margin-bottom: 18px;
+}
+
+.professor-form-group label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #475569;
+  margin-bottom: 6px;
+}
+
+.professor-form-control {
+  border-radius: 10px;
+  border: 1px solid #e2e8f0;
+  padding: 10px 14px;
+}
+
+.professor-form-control:focus {
+  border-color: var(--primary-blue);
+  box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.15);
+}
+
+.professor-modal__info {
+  border-radius: 10px;
+  margin-top: 16px;
+  margin-bottom: 0;
+}
+
+.professor-modal__footer {
+  padding: 16px 24px;
+  border-top: 1px solid #e2e8f0;
+  background: #f8fafc;
+  gap: 12px;
+}
+
+.professor-modal__btn-cancel {
+  border-radius: 10px;
+  padding: 10px 20px;
+}
+
+.professor-modal__btn-submit {
+  border-radius: 10px;
+  padding: 10px 24px;
+}
+
+/* ========== Student Dashboard ========== */
+.student-dashboard {
+  background: linear-gradient(165deg, #eef2ff 0%, #fef3c7 35%, #f8fafc 100%);
+  min-height: 100%;
+}
+
+.student-dashboard-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 320px;
+  gap: 16px;
+}
+
+.student-dashboard-loading p {
+  margin: 0;
+  color: #64748b;
+  font-size: 0.95rem;
+}
+
+.student-dashboard-spinner {
+  width: 44px;
+  height: 44px;
+  border: 3px solid #e0e7ff;
+  border-top-color: #6366f1;
+  border-radius: 50%;
+  animation: student-spin 0.8s linear infinite;
+}
+
+@keyframes student-spin {
+  to { transform: rotate(360deg); }
+}
+
+.student-dashboard-header {
+  margin-bottom: 28px;
+}
+
+.student-dashboard-header h1 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #1e1b4b;
+  margin-bottom: 6px;
+  letter-spacing: -0.02em;
+}
+
+.student-dashboard-header p {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #64748b;
+}
+
+.student-dashboard-info {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+  padding: 8px 14px;
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.12) 0%, rgba(245, 158, 11, 0.1) 100%);
+  border-radius: 10px;
+  font-size: 0.9rem;
+  color: #4338ca;
+  font-weight: 500;
+}
+
+.student-dashboard-info__divider {
+  color: #a5b4fc;
+  font-weight: 600;
+}
+
+.student-dashboard-info__batch {
+  color: #b45309;
+}
+
+.student-dashboard-section {
+  margin-bottom: 24px;
+}
+
+/* Student cards */
+.student-card {
+  border: none;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(30, 27, 75, 0.08);
+  background: white;
+}
+
+.student-card--today .student-card__header {
+  background: linear-gradient(135deg, #4f46e5 0%, #6366f1 45%, #818cf8 100%);
+  color: white;
+  padding: 16px 24px;
+}
+
+.student-card__header--today .student-card__badge {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  opacity: 0.95;
+  margin-bottom: 4px;
+}
+
+.student-card__header--today h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.student-card__body {
+  padding: 20px 24px;
+}
+
+.student-empty {
+  text-align: center;
+  padding: 32px 16px;
+  color: #94a3b8;
+  font-size: 0.95rem;
+}
+
+.student-empty p {
+  margin: 0;
+}
+
+/* Student table */
+.student-table {
+  margin: 0;
+  border-collapse: collapse;
+}
+
+.student-table thead th {
+  background: #f8fafc;
+  color: #475569;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 12px 16px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.student-table tbody td {
+  padding: 14px 16px;
+  border-bottom: 1px solid #f1f5f9;
+  vertical-align: middle;
+  font-size: 0.9rem;
+}
+
+.student-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.student-table tbody tr:hover {
+  background: #faf5ff;
+}
+
+.student-table__time {
+  color: #4f46e5;
+  font-weight: 500;
+}
+
+.student-table__date {
+  color: #6366f1;
+  font-weight: 500;
+}
+
+.student-room {
+  display: inline-block;
+  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+  color: #b45309;
+  padding: 4px 10px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+/* Weekly timetable card */
+.student-card--weekly .card-body,
+.student-card--auditorium .card-body {
+  padding: 24px;
+}
+
+.student-weekly-header,
+.student-auditorium-header {
+  margin-bottom: 20px;
+}
+
+.student-weekly-header h2,
+.student-auditorium-header h2 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #1e1b4b;
+  margin-bottom: 4px;
+}
+
+.student-weekly-header p,
+.student-auditorium-header p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #64748b;
+}
+
+.student-weekly-grid {
+  margin: 0 -6px;
+}
+
+/* Day cards */
+.student-day-card {
+  background: white;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  overflow: hidden;
+  min-height: 180px;
+  transition: box-shadow 0.2s, border-color 0.2s;
+}
+
+.student-day-card:hover {
+  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.08);
+}
+
+.student-day-card--today {
+  border-color: #f59e0b;
+  box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.2);
+  background: linear-gradient(180deg, #fffbeb 0%, #ffffff 24px);
+}
+
+.student-day-card__header {
+  background: #f8fafc;
+  padding: 10px 12px;
+  text-align: center;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.student-day-card--today .student-day-card__header {
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  color: white;
+  border-bottom: none;
+}
+
+.student-day-card__label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.student-day-card__body {
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.student-day-card__empty {
+  margin: 0;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 0.8rem;
+  color: #94a3b8;
+}
+
+/* Read-only class blocks (no reschedule) */
+.student-class-block {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  padding: 10px 12px;
+  background: linear-gradient(135deg, #eef2ff 0%, #fef3c7 100%);
+  border: 1px solid #c7d2fe;
+  border-radius: 10px;
+  text-align: left;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.student-class-block:hover {
+  background: linear-gradient(135deg, #e0e7ff 0%, #fde68a 100%);
+  border-color: #a5b4fc;
+}
+
+.student-class-block__subject {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #1e1b4b;
+  margin-bottom: 2px;
+}
+
+.student-class-block__time {
+  font-size: 0.75rem;
+  color: #4f46e5;
+  font-weight: 500;
+}
+
+.student-class-block__room {
+  font-size: 0.75rem;
+  color: #64748b;
+}
+
+/* Student My Timetable page – room × time grid (read-only) */
+.student-timetable-card .timetable-room-grid {
+  font-size: 0.875rem;
+}
+
+.student-timetable-room-block {
+  transition: background 0.2s;
+}
+
+.student-timetable-room-block:hover {
+  background: #eef2ff !important;
+}
