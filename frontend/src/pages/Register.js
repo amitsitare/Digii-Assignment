@@ -97,7 +97,7 @@ const Register = () => {
                     type="text"
                     name="first_name"
                     className="form-input"
-                    placeholder="John"
+                    placeholder="Amit"
                     value={formData.first_name}
                     onChange={handleChange}
                     required
@@ -111,7 +111,7 @@ const Register = () => {
                     type="text"
                     name="last_name"
                     className="form-input"
-                    placeholder="Doe"
+                    placeholder="Diwakar"
                     value={formData.last_name}
                     onChange={handleChange}
                     required
