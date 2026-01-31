@@ -1,14 +1,39 @@
 from app.db import query_db, insert_db
-from datetime import datetime
+
+
+def _serialize_notification(row):
+    """Convert notification row to JSON-friendly dict (e.g. for socket emit)."""
+    if not row:
+        return None
+    out = dict(row)
+    if hasattr(out.get('created_at'), 'isoformat'):
+        out['created_at'] = out['created_at'].isoformat()
+    return out
 
 
 def create_notification(user_id, title, content, notification_type):
-    """Create a new notification for a user"""
-    return insert_db(
+    """Create a new notification for a user and emit real-time event via Socket.IO."""
+    new_id = insert_db(
         """INSERT INTO notifications (user_id, title, content, notification_type)
            VALUES (%s, %s, %s, %s)""",
         (user_id, title, content, notification_type)
     )
+    row = query_db(
+        "SELECT id, user_id, title, content, notification_type, is_read, created_at FROM notifications WHERE id = %s",
+        (new_id,),
+        one=True
+    )
+    payload = _serialize_notification(row)
+
+    # Emit real-time event so the user's client updates without polling
+    try:
+        from app import socketio
+        if socketio is not None and payload:
+            socketio.emit('new_notification', payload, room=f'user_{user_id}')
+    except Exception:
+        pass  # Vercel/serverless: socketio may be None; ignore
+
+    return new_id
 
 def notify_students_of_timetable_change(timetable_entry, change_type='updated'):
     """Notify all students of a department/batch about timetable changes"""
