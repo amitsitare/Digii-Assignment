@@ -76,7 +76,7 @@ export const NotificationProvider = ({ children }) => {
     return () => {
       if (typeof unsubscribe === 'function') unsubscribe();
     };
-  }, [isAuthenticated, user?.id, on]);
+  }, [isAuthenticated, user, on]);
 
   const markAsRead = async (notificationId) => {
     try {

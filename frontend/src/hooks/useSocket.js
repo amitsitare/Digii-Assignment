@@ -45,6 +45,7 @@ export const useSocket = () => {
     return () => {
       newSocket.disconnect();
     };
+  // eslint-disable-next-line react-hooks/exhaustive-deps -- socket omitted to avoid re-run when setSocket updates
   }, [isAuthenticated, user]);
 
   const joinRoom = useCallback((room) => {
