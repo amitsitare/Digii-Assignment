@@ -1,16 +1,23 @@
+import os
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from flask_jwt_extended import JWTManager
 from flask_mail import Mail
-from flask_socketio import SocketIO
 
 from .config import Config
 from .db import init_db, init_schema, close_db
 
+# Vercel serverless does not support WebSockets; skip SocketIO when VERCEL=1
+VERCEL = os.environ.get('VERCEL') == '1'
+if VERCEL:
+    socketio = None
+else:
+    from flask_socketio import SocketIO
+    socketio = SocketIO()
+
 # Initialize extensions
 jwt = JWTManager()
 mail = Mail()
-socketio = SocketIO()
 
 def create_app(config_class=Config):
     app = Flask(__name__)
@@ -30,7 +37,8 @@ def create_app(config_class=Config):
     )
     jwt.init_app(app)
     mail.init_app(app)
-    socketio.init_app(app, cors_allowed_origins=app.config['CORS_ORIGINS'])
+    if socketio is not None:
+        socketio.init_app(app, cors_allowed_origins=app.config['CORS_ORIGINS'])
     
     # Initialize database and create tables if they don't exist
     with app.app_context():
