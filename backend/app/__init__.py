@@ -49,12 +49,21 @@ def create_app(config_class=Config):
     app.teardown_appcontext(close_db)
     
     # Ensure CORS headers on EVERY response so browser never blocks (including JWT/role errors)
+    # Normalize for comparison: browser sends origin without trailing slash; env may have with slash
+    _origins_normalized = {o.rstrip('/') for o in origins}
+
     @app.after_request
     def add_cors_headers(response):
         # Always send CORS when we have allowed origins: use request origin if allowed, else first allowed
         if not origins:
             return response
-        origin = (request.origin if request.origin in origins else None) or origins[0]
+        req_origin = (request.origin or '').strip()
+        req_origin_norm = req_origin.rstrip('/')
+        # Echo back the exact request.origin so header matches (CORS requires exact match)
+        if req_origin_norm in _origins_normalized:
+            origin = req_origin
+        else:
+            origin = origins[0]
         response.headers['Access-Control-Allow-Origin'] = origin
         response.headers['Access-Control-Allow-Credentials'] = 'true'
         response.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization'

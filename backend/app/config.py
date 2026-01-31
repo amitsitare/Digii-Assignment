@@ -24,5 +24,6 @@ class Config:
     MAIL_DEFAULT_SENDER = os.getenv('MAIL_DEFAULT_SENDER', os.getenv('MAIL_USERNAME', ''))
     
     # CORS – allow frontend origin; never leave empty (causes CORS block)
+    # Normalize: strip trailing slashes so "https://example.com/" matches browser origin "https://example.com"
     _origins = os.getenv('CORS_ORIGINS', 'http://localhost:3000').strip()
-    CORS_ORIGINS = [o.strip() for o in _origins.split(',') if o.strip()] or ['http://localhost:3000']
+    CORS_ORIGINS = [o.strip().rstrip('/') for o in _origins.split(',') if o.strip()] or ['http://localhost:3000']
