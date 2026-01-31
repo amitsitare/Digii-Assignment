@@ -22,7 +22,7 @@ const Sidebar = () => {
         return [
           { path: '/professor', label: 'Dashboard' },
           { path: '/professor/schedule', label: 'My Schedule' },
-          { path: '/professor/reschedule', label: 'Reschedule Class' },
+          { path: '/professor/reschedule', label: 'Rescheduled Class' },
           { path: '/chat', label: 'Messages' },
         ];
       case 'student':

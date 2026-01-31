@@ -7,6 +7,7 @@ import io
 
 from app.db import query_db, insert_db, execute_db
 from app.utils.decorators import role_required
+from app.utils.serializers import serialize_rows
 from app.utils.validators import validate_email
 from app.services.email_service import send_credentials_email
 from app.services.notification_service import notify_all_users_auditorium_booking
@@ -343,7 +344,7 @@ def list_auditorium_bookings():
         WHERE ab.status = 'confirmed'
         ORDER BY ab.booking_date, ab.start_time
     """)
-    
+    bookings = serialize_rows(bookings)
     return jsonify({'bookings': bookings}), 200
 
 @admin_bp.route('/stats', methods=['GET'])

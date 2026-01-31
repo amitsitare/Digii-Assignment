@@ -10,8 +10,8 @@ const AppNavbar = () => {
   const navigate = useNavigate();
 
   const handleLogout = async () => {
+    navigate('/'); // Redirect to home first so all roles land on home after logout
     await logout();
-    navigate('/');
   };
 
   const getDashboardLink = () => {

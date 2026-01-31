@@ -96,33 +96,37 @@ const AdminDashboard = () => {
   }, [currentPath]);
 
   const fetchData = async () => {
-    try {
-      const [
-        statsData,
-        deptData,
-        classroomData,
-        professorsData,
-        studentsData,
-        auditoriumData,
-      ] = await Promise.all([
-        adminService.getStats(),
-        adminService.getDepartments(),
-        adminService.getClassrooms(),
-        adminService.getUsers({ role: 'professor' }),
-        adminService.getUsers({ role: 'student' }),
-        adminService.getAuditoriumBookings(),
-      ]);
-      setStats(statsData);
-      setDepartments(deptData.departments);
-      setClassrooms(classroomData.classrooms);
-      setProfessors(professorsData.users);
-      setStudents(studentsData.users);
-      setAuditoriumBookings(auditoriumData.bookings || []);
-    } catch (err) {
-      console.error('Failed to fetch data:', err);
-    } finally {
-      setLoading(false);
+    setLoading(true);
+    setError('');
+    const requests = [
+      { key: 'stats', fn: () => adminService.getStats() },
+      { key: 'departments', fn: () => adminService.getDepartments() },
+      { key: 'classrooms', fn: () => adminService.getClassrooms() },
+      { key: 'professors', fn: () => adminService.getUsers({ role: 'professor' }) },
+      { key: 'students', fn: () => adminService.getUsers({ role: 'student' }) },
+      { key: 'auditorium', fn: () => adminService.getAuditoriumBookings() },
+    ];
+    const results = await Promise.allSettled(requests.map((r) => r.fn()));
+    const failures = [];
+    results.forEach((result, i) => {
+      const { key } = requests[i];
+      if (result.status === 'fulfilled') {
+        const data = result.value;
+        if (key === 'stats') setStats(data);
+        else if (key === 'departments') setDepartments(data.departments || []);
+        else if (key === 'classrooms') setClassrooms(data.classrooms || []);
+        else if (key === 'professors') setProfessors(data.users || []);
+        else if (key === 'students') setStudents(data.users || []);
+        else if (key === 'auditorium') setAuditoriumBookings(data.bookings || []);
+      } else {
+        console.error(`Admin fetch failed (${key}):`, result.reason);
+        failures.push(key);
+      }
+    });
+    if (failures.length > 0) {
+      setError(`Could not load: ${failures.join(', ')}. Check console or try again.`);
     }
+    setLoading(false);
   };
 
   // Filter departments to only show allowed ones (by matching code)
@@ -1064,6 +1068,16 @@ onClick={() => {
 
     return (
       <div className="dashboard-content">
+        {error && (
+          <Alert variant="danger" dismissible onClose={() => setError('')} className="mb-3">
+            {error}
+          </Alert>
+        )}
+        {success && (
+          <Alert variant="success" dismissible onClose={() => setSuccess('')} className="mb-3">
+            {success}
+          </Alert>
+        )}
         {pageContent}
       </div>
     );

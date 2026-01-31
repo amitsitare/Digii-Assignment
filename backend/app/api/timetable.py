@@ -37,7 +37,7 @@ def get_timetable():
         query += " AND t.batch = %s"
         params.append(batch)
     
-    if day_of_week is not None:
+    if day_of_week is not None and str(day_of_week).strip() != '':
         query += " AND t.day_of_week = %s"
         params.append(day_of_week)
     

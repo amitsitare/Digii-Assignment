@@ -22,7 +22,7 @@ function App() {
   return (
     <AuthProvider>
       <NotificationProvider>
-        <Router>
+        <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
           <div className="App">
             <Routes>
               {/* Public Routes */}

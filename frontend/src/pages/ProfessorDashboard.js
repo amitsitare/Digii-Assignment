@@ -359,7 +359,7 @@ const ProfessorDashboard = () => {
   const renderReschedulePage = () => (
     <Container fluid>
       <header className="professor-dashboard-header">
-        <h1>Reschedule Class</h1>
+        <h1>Rescheduled Class</h1>
         <p>Only classes you have rescheduled. Click Reschedule to change date, time, or room again.</p>
       </header>
       <section className="professor-dashboard-section">
