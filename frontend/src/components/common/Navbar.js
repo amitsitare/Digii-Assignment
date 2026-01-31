@@ -71,9 +71,8 @@ const AppNavbar = () => {
             ) : (
               <>
                 <Nav.Link as={Link} to="/#features">Features</Nav.Link>
-                <Nav.Link as={Link} to="/#about">About</Nav.Link>
                 <Nav.Link as={Link} to="/login">Login</Nav.Link>
-                <Nav.Link as={Link} to="/register" className="btn btn-primary-gradient ms-2 text-white">
+                <Nav.Link as={Link} to="/register" className="btn btn-register-nav ms-2">
                   Register
                 </Nav.Link>
               </>

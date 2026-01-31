@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
-import { Container, Card, Form, Button, ListGroup, Modal, Badge } from 'react-bootstrap';
+import { Container, Form, Button, Modal } from 'react-bootstrap';
 import { useAuth } from '../context/AuthContext';
 import { chatService } from '../services/chatService';
 import { adminService } from '../services/adminService';
-import { getRelativeTime, BATCH_OPTIONS } from '../utils/constants';
+import { getRelativeTime } from '../utils/constants';
 
 const SEND_MODES = {
   BROADCAST: 'broadcast',
@@ -15,17 +15,16 @@ const SEND_MODES = {
 
 const ChatPage = () => {
   const { user } = useAuth();
-  const [messages, setMessages] = useState([]);
-  const [sentMessages, setSentMessages] = useState([]);
-  const [searchResults, setSearchResults] = useState([]);
+  const [receivedMessages, setReceivedMessages] = useState([]);
+  const [, setSentMessages] = useState([]);
+  const [, setSearchResults] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
-  const [newMessage, setNewMessage] = useState('');
-  const [selectedRecipients, setSelectedRecipients] = useState([]);
-  const [messageType, setMessageType] = useState('direct');
-  const [targetBatch, setTargetBatch] = useState('');
+  const [, setNewMessage] = useState('');
+  const [, setSelectedRecipients] = useState([]);
+  const [, setMessageType] = useState('direct');
+  const [, setTargetBatch] = useState('');
   const [loading, setLoading] = useState(true);
   const [showNewMessageModal, setShowNewMessageModal] = useState(false);
-  const [activeTab, setActiveTab] = useState('received');
 
   // Admin/Professor: send-mode choice and list selection
   const [adminSendMode, setAdminSendMode] = useState(null);
@@ -68,7 +67,7 @@ const ChatPage = () => {
         chatService.getSentMessages(),
         chatService.getConversations().catch(() => ({ conversations: [] })),
       ]);
-      setMessages(messagesData.messages);
+      setReceivedMessages(messagesData.messages || []);
       setSentMessages(sentData.messages);
       setConversations(convData.conversations || []);
     } catch (err) {
@@ -259,92 +258,6 @@ const ChatPage = () => {
     setShowNewMessageModal(false);
   };
 
-  const handleSendMessage = async () => {
-    if (!newMessage.trim()) return;
-
-    let messagePayload = { content: newMessage.trim() };
-
-    if ((isAdmin || isProfessor || isStudent) && adminSendMode) {
-      if (adminSendMode === SEND_MODES.BROADCAST) {
-        messagePayload.message_type = 'broadcast';
-      } else if (adminSendMode === SEND_MODES.ADMIN) {
-        const ids = Array.from(selectedAdminIds);
-        if (ids.length === 0) {
-          alert('Please select at least one admin.');
-          return;
-        }
-        messagePayload.message_type = 'direct';
-        messagePayload.recipients = ids;
-      } else if (adminSendMode === SEND_MODES.ALL_PROFESSORS) {
-        try {
-          const { users } = await adminService.getUsers({ role: 'professor' });
-          const ids = (users || []).map((u) => u.id).filter(Boolean);
-          if (ids.length === 0) {
-            alert('No professors found.');
-            return;
-          }
-          messagePayload.message_type = 'direct';
-          messagePayload.recipients = ids;
-        } catch (e) {
-          alert('Failed to load professors.');
-          return;
-        }
-      } else if (adminSendMode === SEND_MODES.SELECTED_PROFESSORS) {
-        const ids = Array.from(selectedProfessorIds);
-        if (ids.length === 0) {
-          alert('Please select at least one professor.');
-          return;
-        }
-        messagePayload.message_type = 'direct';
-        messagePayload.recipients = ids;
-      } else if (adminSendMode === SEND_MODES.SELECTED_STUDENTS) {
-        const ids = Array.from(selectedStudentIds);
-        if (ids.length === 0) {
-          alert('Please select at least one student.');
-          return;
-        }
-        messagePayload.message_type = 'direct';
-        messagePayload.recipients = ids;
-      }
-    } else {
-      messagePayload.message_type = messageType;
-      if (messageType === 'direct') {
-        if (selectedRecipients.length === 0) {
-          alert('Please select at least one recipient');
-          return;
-        }
-        messagePayload.recipients = selectedRecipients.map((r) => r.id);
-      } else if (messageType === 'batch' && targetBatch) {
-        messagePayload.target_batch = targetBatch;
-      }
-    }
-
-    try {
-      await chatService.sendMessage(messagePayload);
-      const recipientIds = messagePayload.recipients || [];
-      handleCloseNewMessageModal();
-      await fetchData();
-      if (recipientIds.length === 1) {
-        const id = recipientIds[0];
-        const nameFrom =
-          selectedRecipients.find((r) => r.id === id) ||
-          professorsList.find((p) => p.id === id) ||
-          studentsList.find((s) => s.id === id) ||
-          adminsList.find((a) => a.id === id);
-        setActiveChatUser(
-          nameFrom
-            ? { id, first_name: nameFrom.first_name, last_name: nameFrom.last_name, role: nameFrom.role }
-            : { id }
-        );
-        const data = await chatService.getConversationThread(id);
-        setThreadMessages(data.messages || []);
-        if (data.other_user) setActiveChatUser(data.other_user);
-      }
-    } catch (err) {
-      alert(err.response?.data?.error || 'Failed to send message');
-    }
-  };
-
   const sendFromThread = async () => {
     const content = (threadMessageInput || '').trim();
     if (!content || !activeChatUser?.id) return;
@@ -421,18 +334,6 @@ const ChatPage = () => {
     }
   };
 
-  const addRecipient = (u) => {
-    if (!selectedRecipients.find((r) => r.id === u.id)) {
-      setSelectedRecipients([...selectedRecipients, u]);
-    }
-    setSearchQuery('');
-    setSearchResults([]);
-  };
-
-  const removeRecipient = (userId) => {
-    setSelectedRecipients(selectedRecipients.filter((r) => r.id !== userId));
-  };
-
   const toggleProfessor = (id) => {
     setSelectedProfessorIds((prev) => {
       const next = new Set(prev);
@@ -476,19 +377,6 @@ const ChatPage = () => {
     });
   };
 
-  const getMessageTypeLabel = (type) => {
-    switch (type) {
-      case 'broadcast':
-        return 'Broadcast';
-      case 'department':
-        return 'Department';
-      case 'batch':
-        return 'Batch';
-      default:
-        return 'Direct';
-    }
-  };
-
   const filterBySearch = (list, search, nameKeys = ['first_name', 'last_name', 'email']) => {
     if (!search.trim()) return list;
     const q = search.trim().toLowerCase();
@@ -508,7 +396,38 @@ const ChatPage = () => {
     );
   }
 
-  const userName = user?.first_name || user?.email || 'there';
+  const displayName = user?.first_name || user?.email || 'there';
+
+  // Format sender label for received messages: "From: Name (role)" or "Broadcast message sent by Name"
+  const getReceivedMessageSenderLabel = (msg) => {
+    const name = [msg.sender_first_name, msg.sender_last_name].filter(Boolean).join(' ') || 'Unknown';
+    const role = (msg.sender_role || '').toLowerCase();
+    const roleLabel = role ? role.charAt(0).toUpperCase() + role.slice(1) : '';
+    if (msg.message_type === 'broadcast') {
+      return `Broadcast message sent by ${name}`;
+    }
+    if (msg.message_type === 'department') {
+      return `Department message sent by ${name}`;
+    }
+    if (msg.message_type === 'batch') {
+      return `Batch message sent by ${name}`;
+    }
+    return roleLabel ? `From: ${name} (${roleLabel})` : `From: ${name}`;
+  };
+
+  const recentReceived = (receivedMessages || []).slice(0, 25);
+
+  // When user clicks a received message in the right panel, open chat with that sender
+  const openChatWithSender = (msg) => {
+    if (!msg?.sender_id) return;
+    setActiveSendMode(null);
+    setActiveChatUser({
+      id: msg.sender_id,
+      first_name: msg.sender_first_name || '',
+      last_name: msg.sender_last_name || '',
+      role: msg.sender_role || '',
+    });
+  };
 
   return (
     <Container fluid className="chat-page-whatsapp chat-page-no-gap px-0">
@@ -685,6 +604,7 @@ const ChatPage = () => {
             <>
               <div className="chat-sidebar-header">
                 <h5 className="mb-0 fw-bold">Messages</h5>
+                <span className="text-muted small">Hi, {displayName}</span>
                 <Button
                   size="sm"
                   className="btn-primary-gradient rounded-pill"
@@ -917,6 +837,40 @@ const ChatPage = () => {
               </div>
             </>
           ) : null}
+        </div>
+
+        {/* Right: Recent received messages (admin, professor, student) */}
+        <div className="chat-recent-messages">
+          <div className="chat-recent-messages-header">
+            <h6 className="mb-0 fw-bold">Recent received messages</h6>
+          </div>
+          <div className="chat-recent-messages-list">
+            {recentReceived.length === 0 ? (
+              <p className="text-muted small text-center py-4 px-2 mb-0">No received messages yet.</p>
+            ) : (
+              recentReceived.map((msg) => (
+                <div
+                  key={msg.id}
+                  className="chat-recent-msg-item chat-recent-msg-item-clickable"
+                  role="button"
+                  tabIndex={0}
+                  onClick={() => openChatWithSender(msg)}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault();
+                      openChatWithSender(msg);
+                    }
+                  }}
+                >
+                  <small className="chat-recent-msg-sender text-primary fw-semibold d-block mb-1">
+                    {getReceivedMessageSenderLabel(msg)}
+                  </small>
+                  <div className="chat-recent-msg-content">{msg.content}</div>
+                  <small className="chat-recent-msg-time text-muted">{getRelativeTime(msg.created_at)}</small>
+                </div>
+              ))
+            )}
+          </div>
         </div>
       </div>
 

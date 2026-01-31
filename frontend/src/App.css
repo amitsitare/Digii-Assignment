@@ -29,7 +29,7 @@
   
   /* Gradients */
   --gradient-primary: linear-gradient(135deg, #4361ee 0%, #7209b7 100%);
-  --gradient-hero: linear-gradient(135deg, #1a1a2e 0%, #3a0ca3 50%, #4361ee 100%);
+  --gradient-hero: linear-gradient(160deg, #0f172a 0%, #1e3a8a 45%, #4338ca 100%);
 }
 
 /* Typography */
@@ -400,14 +400,13 @@ h1, h2, h3, h4, h5, h6 {
   display: flex;
   align-items: center;
   overflow: hidden;
-  background: var(--gradient-hero); /* fallback if image fails */
+  background: var(--gradient-hero);
 }
 
 .hero-bg-image {
   position: absolute;
   inset: 0;
-  /* Lush campus / stone university (primary) with local fallback */
-  background-image: url('https://images.unsplash.com/photo-1759093886545-ad615b17ce46?w=1920&q=85'), url('./assets/campus-hero-bg.jpg');
+  background-image: url('https://images.unsplash.com/photo-1562774053-701939374585?w=1920&q=85'), url('./assets/campus-hero-bg.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -417,10 +416,10 @@ h1, h2, h3, h4, h5, h6 {
   position: absolute;
   inset: 0;
   background: linear-gradient(
-    135deg,
-    rgba(26, 26, 46, 0.92) 0%,
-    rgba(58, 12, 163, 0.85) 45%,
-    rgba(67, 97, 238, 0.8) 100%
+    180deg,
+    rgba(15, 23, 42, 0.72) 0%,
+    rgba(30, 58, 138, 0.82) 50%,
+    rgba(49, 46, 129, 0.9) 100%
   );
 }
 
@@ -991,16 +990,43 @@ h1, h2, h3, h4, h5, h6 {
   object-fit: contain;
 }
 
+/* Navbar Register button – distinct, good-looking color */
+.btn-register-nav {
+  background: linear-gradient(135deg, #52b5e7 0%, #5babe8 100%);
+  color: #fff !important;
+  font-weight: 600;
+  padding: 0.5rem 1.25rem;
+  border-radius: 10px;
+  border: none;
+  box-shadow: 0 2px 8px rgba(5, 9, 8, 0.35);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-register-nav:hover {
+  color: #fff !important;
+  background: linear-gradient(135deg, #0988bb 0%, #0696cb 100%);
+  transform: translateY(-1px);
+}
+
 /* Footer – dark background, readable text */
 .footer {
   background: var(--dark-bg);
   color: #e9ecef;
-  padding: 60px 0 30px;
+  padding: 3.5rem 0 0;
+  margin-top: auto;
+}
+
+.footer-main {
+  padding-bottom: 2rem;
+}
+
+.footer-brand {
+  max-width: 360px;
 }
 
 .footer-logo-link {
   display: inline-block;
-  margin-bottom: 12px;
+  margin-bottom: 1rem;
 }
 
 .footer-logo {
@@ -1010,35 +1036,104 @@ h1, h2, h3, h4, h5, h6 {
   display: block;
 }
 
-.footer-tagline,
-.footer-contact,
-.footer-copyright {
+.footer-tagline {
   color: rgba(255, 255, 255, 0.85);
   font-size: 0.95rem;
-  line-height: 1.5;
+  line-height: 1.6;
+  margin: 0;
 }
 
 .footer-heading {
   color: #fff;
-  font-size: 1rem;
+  font-size: 0.875rem;
   font-weight: 600;
-  margin-bottom: 16px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin: 0 0 1rem 0;
 }
 
-.footer a {
+.footer-nav .footer-heading,
+.footer-contact-block .footer-heading {
+  margin-top: 0.25rem;
+}
+
+.footer-links {
+  margin: 0;
+  padding: 0;
+}
+
+.footer-links li {
+  margin-bottom: 0.5rem;
+}
+
+.footer-links li:last-child {
+  margin-bottom: 0;
+}
+
+.footer-features-tagline {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.4;
+  margin-top: 0.25rem;
+  padding-left: 0;
+}
+
+.footer-links a,
+.footer-contact-link {
   color: rgba(255, 255, 255, 0.9);
   text-decoration: none;
-  display: block;
-  margin-bottom: 8px;
-  transition: color 0.2s;
+  transition: color 0.2s ease;
 }
 
-.footer a:hover {
+.footer-links a:hover,
+.footer-contact-link:hover {
   color: #fff;
 }
 
+.footer-contact-block .footer-contact {
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin: 0;
+}
+
 .footer-divider {
-  border-color: rgba(255, 255, 255, 0.15);
+  border: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  margin: 0;
+}
+
+.footer-bottom {
+  padding: 1.25rem 0 2rem;
+  text-align: center;
+}
+
+.footer-copyright {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.875rem;
+  margin: 0;
+}
+
+@media (max-width: 767px) {
+  .footer {
+    padding-top: 2.5rem;
+  }
+
+  .footer-main {
+    padding-bottom: 1.5rem;
+  }
+
+  .footer-brand {
+    max-width: none;
+  }
+
+  .footer-contact-block .footer-heading {
+    margin-top: 0;
+  }
+
+  .footer-bottom {
+    padding: 1rem 0 1.5rem;
+  }
 }
 
 /* Responsive */
@@ -2276,4 +2371,70 @@ h1, h2, h3, h4, h5, h6 {
 .chat-gpt-send-inside:disabled {
   opacity: 0.5;
   cursor: not-allowed;
+}
+
+/* Right panel: Recent received messages (admin, professor, student) */
+.chat-recent-messages {
+  width: 300px;
+  min-width: 260px;
+  border-left: 1px solid #e9ecef;
+  display: flex;
+  flex-direction: column;
+  background: #f8f9fa;
+  flex-shrink: 0;
+}
+
+.chat-recent-messages-header {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid #e9ecef;
+  background: #fff;
+}
+
+.chat-recent-messages-header h6 {
+  font-size: 0.95rem;
+}
+
+.chat-recent-messages-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0.5rem;
+}
+
+.chat-recent-msg-item {
+  padding: 0.6rem 0.75rem;
+  margin-bottom: 0.5rem;
+  background: #fff;
+  border-radius: 10px;
+  border: 1px solid #e9ecef;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+.chat-recent-msg-item-clickable {
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, box-shadow 0.15s;
+}
+
+.chat-recent-msg-item-clickable:hover {
+  background: #eef2ff;
+  border-color: rgba(67, 97, 238, 0.3);
+  box-shadow: 0 2px 6px rgba(67, 97, 238, 0.12);
+}
+
+.chat-recent-msg-sender {
+  font-size: 0.8rem;
+  line-height: 1.3;
+}
+
+.chat-recent-msg-content {
+  font-size: 0.9rem;
+  color: #212529;
+  white-space: pre-wrap;
+  word-break: break-word;
+  line-height: 1.4;
+  margin-bottom: 4px;
+}
+
+.chat-recent-msg-time {
+  font-size: 0.7rem;
+  display: block;
 }

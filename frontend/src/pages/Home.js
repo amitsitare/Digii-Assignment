@@ -1,5 +1,5 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { Container, Row, Col, Card } from 'react-bootstrap';
 import logoImg from '../assets/CampusOne.jpg';
 
@@ -11,6 +11,16 @@ const whatWeSolveData = [
 ];
 
 const Home = () => {
+  const { hash } = useLocation();
+
+  // When navigating to /#features (from header or footer on another page), scroll to features section
+  useEffect(() => {
+    if (hash === '#features') {
+      const el = document.getElementById('features');
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }, [hash]);
+
   return (
     <div>
       {/* Hero Section */}
@@ -40,7 +50,7 @@ const Home = () => {
       </section>
 
       {/* What We Solve Section - Hierarchy / Table layout */}
-      <section className="py-5 what-we-solve-section" id="features">
+      <section className="py-5 what-we-solve-section" id="what-we-solve">
         <Container>
           <h2 className="text-center mb-2 section-heading">What We Solve</h2>
           <p className="text-center text-muted mb-4 section-sub">Problems we address — and how CampusOne fixes them</p>
@@ -105,7 +115,7 @@ const Home = () => {
       </section>
 
       {/* Features Grid */}
-      <section className="py-5 features-section" id="features-grid">
+      <section className="py-5 features-section" id="features">
         <Container>
           <div className="features-section-header text-center mb-5">
             <h2 className="section-heading features-heading">Features</h2>
@@ -248,29 +258,48 @@ const Home = () => {
       {/* Footer */}
       <footer className="footer">
         <Container>
-          <Row>
-            <Col md={6}>
-              <Link to="/" className="footer-logo-link">
-                <img src={logoImg} alt="CampusOne" className="footer-logo" />
-              </Link>
-              <p className="footer-tagline">One platform to manage timetables, classrooms, and communication across your entire campus.</p>
-            </Col>
-            <Col md={3}>
-              <h6 className="footer-heading">Quick Links</h6>
-              <Link to="/">Home</Link>
-              <Link to="/#features">Features</Link>
-              <Link to="/login">Login</Link>
-              <Link to="/register">Register</Link>
-            </Col>
-            <Col md={3}>
-              <h6 className="footer-heading">Contact</h6>
-              <p className="footer-contact mb-0">support@campusone.edu</p>
-            </Col>
-          </Row>
-          <hr className="footer-divider my-4" />
-          <p className="footer-copyright text-center mb-0">
-            2026 CampusOne. All rights reserved.
-          </p>
+          <div className="footer-main">
+            <Row className="g-4 g-lg-5 align-items-start">
+              <Col xs={12} md={6} lg={6}>
+                <div className="footer-brand">
+                  <Link to="/" className="footer-logo-link">
+                    <img src={logoImg} alt="CampusOne" className="footer-logo" />
+                  </Link>
+                  <p className="footer-tagline">
+                    One platform to manage timetables, classrooms, and communication across your entire campus.
+                  </p>
+                </div>
+              </Col>
+              <Col xs={12} sm={6} md={3} lg={3}>
+                <nav className="footer-nav" aria-label="Footer navigation">
+                  <h6 className="footer-heading">Quick Links</h6>
+                  <ul className="footer-links list-unstyled">
+                    <li><Link to="/">Home</Link></li>
+                    <li>
+                      <Link to="/#features">Features</Link>
+                      <p className="footer-features-tagline mb-0">Everything you need to run and stay on top of campus life</p>
+                    </li>
+                    <li><Link to="/login">Login</Link></li>
+                    <li><Link to="/register">Register</Link></li>
+                  </ul>
+                </nav>
+              </Col>
+              <Col xs={12} sm={6} md={3} lg={3}>
+                <div className="footer-contact-block">
+                  <h6 className="footer-heading">Contact</h6>
+                  <p className="footer-contact">
+                    <a href="mailto:support@campusone.edu" className="footer-contact-link">support@campusone.edu</a>
+                  </p>
+                </div>
+              </Col>
+            </Row>
+          </div>
+          <hr className="footer-divider" />
+          <div className="footer-bottom">
+            <p className="footer-copyright">
+              &copy; 2026 CampusOne. All rights reserved.
+            </p>
+          </div>
         </Container>
       </footer>
     </div>
