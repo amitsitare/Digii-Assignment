@@ -1,3 +1,5 @@
+import os
+import re
 import psycopg2
 from psycopg2 import pool
 from psycopg2.extras import RealDictCursor
@@ -17,6 +19,29 @@ def init_db(app):
         password=app.config['DB_PASSWORD'],
         port=app.config['DB_PORT']
     )
+
+def init_schema(app):
+    """
+    Create tables and seed data if they don't exist.
+    Idempotent: safe to run on every app startup.
+    """
+    schema_path = os.path.join(os.path.dirname(__file__), '..', 'schema_init.sql')
+    if not os.path.isfile(schema_path):
+        return
+    with open(schema_path, 'r', encoding='utf-8') as f:
+        content = f.read()
+    conn = get_db()
+    try:
+        with conn.cursor() as cur:
+            for stmt in re.split(r';\s*\n', content):
+                stmt = stmt.strip()
+                if not stmt:
+                    continue
+                cur.execute(stmt)
+        conn.commit()
+    except Exception:
+        conn.rollback()
+        raise
 
 def get_db():
     """Get a database connection from the pool"""

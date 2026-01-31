@@ -5,7 +5,7 @@ from flask_mail import Mail
 from flask_socketio import SocketIO
 
 from .config import Config
-from .db import init_db, close_db
+from .db import init_db, init_schema, close_db
 
 # Initialize extensions
 jwt = JWTManager()
@@ -32,9 +32,10 @@ def create_app(config_class=Config):
     mail.init_app(app)
     socketio.init_app(app, cors_allowed_origins=app.config['CORS_ORIGINS'])
     
-    # Initialize database
+    # Initialize database and create tables if they don't exist
     with app.app_context():
         init_db(app)
+        init_schema(app)
     
     # Register teardown
     app.teardown_appcontext(close_db)
